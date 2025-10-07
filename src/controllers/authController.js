@@ -105,7 +105,7 @@ const { name, email, phone, password, user_type } = req.body.formData;
       [name, email,phone, hashedPassword,  user_type || "owner"]
     );
     
-    RequestOtp();
+  
 
     res.status(201).json({ user: result.rows[0] });
   } catch (err) {
