@@ -104,11 +104,14 @@ const { name, email, phone, password, user_type } = req.body.formData;
        VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email, phone, user_type`,
       [name, email,phone, hashedPassword,  user_type || "owner"]
     );
-    
-  
+    const owner = result.rows[0];
 
-    res.status(201).json({ user: result.rows[0] });
-  } catch (err) {
+    res.status(201).json({
+      message: "owner registered. OTP sent to phone.",
+      owner,
+    });
+
+   } catch (err) {
     console.error("Register Error:", err.message);
     res.status(500).json({ error: "Server error" });
   }
